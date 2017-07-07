@@ -32,6 +32,7 @@ public class TeamTest {
 
   @Test
   public void getId_teamsInstantiateWithAnId_1() {
+    Team.clear();
     Team testTeam = new Team("Hackers");
     assertEquals(1, testTeam.getId());
   }
@@ -42,5 +43,20 @@ public class TeamTest {
     Team firstTeam = new Team("Home");
     Team secondTeam = new Team("Work");
     assertEquals(Team.find(secondTeam.getId()), secondTeam);
+  }
+
+  @Test
+  public void getMembers_initiallyReturnsEmptyList_ArrayList() {
+    Team.clear();
+    Team testTeam = new Team("Hackers");
+    assertEquals(0, testTeam.getMembers().size());
+  }
+
+  @Test
+  public void addMember_addsMemberToList_true() {
+    Team testTeam = new Team("Hackers");
+    Member testMember = new Member("Victor Ogurtcov");
+    testTeam.addMember(testMember);
+    assertTrue(testTeam.getMembers().contains(testMember));
   }
 }
