@@ -40,6 +40,13 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/members/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Member member = Member.find(Integer.parseInt(request.params(":id")));
+      model.put("member", member);
+      model.put("template", "templates/member.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
     // post("/members", (request, response) -> {
     //   Map<String, Object> model = new HashMap<String, Object>();
