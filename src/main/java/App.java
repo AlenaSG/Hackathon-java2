@@ -48,21 +48,35 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    // post("/members", (request, response) -> {
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //
-    //   ArrayList<Member> members = request.session().attribute("members");
-    // if (members == null) {
-    //   members = new ArrayList<Member>();
-    //   request.session().attribute("members", members);
-    // }
-    //
-    //   String name = request.queryParams("name");
-    //   Member newMember = new Member(name);
-    //   members.add(newMember);
-    //
-    //   model.put("template", "templates/success.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
+    get("/teams/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/team-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/teams", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String teamName = request.queryParams("teamName");
+      Team newTeam = new Team(teamName);
+      model.put("template", "templates/team-success.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/teams", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("teams", Team.all());
+      model.put("template", "templates/teams.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/teams/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Team team = Team.find(Integer.parseInt(request.params(":id")));
+      model.put("team", team);
+      model.put("template", "templates/team.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
   }
 }
