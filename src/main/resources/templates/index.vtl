@@ -1,0 +1,22 @@
+<!--index.vtl-->
+<h1>List of Members</h1>
+
+#if ($members)
+  <ul>
+    #foreach ($member in $members)
+      <li>$member.getName()</li>
+    #end
+  </ul>
+#else
+  <p>Nobody!</p>
+#end
+
+<p>Add a new member</p>
+
+<form action="/members" method="post">
+  <label for="name">Member name:</label>
+  <input id="name" name="name" type="text">
+
+  <button type="submit" class="btn btn-success">Add this member</button>
+</form>
+<!--index.vtl-->
