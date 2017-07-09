@@ -26,10 +26,10 @@ Install this team tracking application by cloning this repository and compiling 
 
 ## Technologies Used
 
-JavaScript
-jUnit
-gradle
-Spark
+* JavaScript
+* jUnit
+* gradle
+* Spark
 
 ### Legal
 
