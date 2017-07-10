@@ -3,7 +3,7 @@
 
 <ul>
   #foreach($member in $team.getMembers())
-   <li>$member.getName()</li>
+   <li><a href="/teams/$team.getId()/members/$member.getId()">$member.getName()</a></li>
   #end
 </ul>
 

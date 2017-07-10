@@ -25,13 +25,6 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/members", (request, response) -> {
-      Map<String, Object> model = new HashMap<String, Object>();
-      model.put("members", Member.all());
-      model.put("template", "templates/members.vtl");
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
-
     //new route for creating and adding members inside teams
     post("/members", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -44,9 +37,11 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/members/:id", (request, response) -> {
+    get("/teams/:team_id/members/:member_id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      Member member = Member.find(Integer.parseInt(request.params(":id")));
+      Team team = Team.find(Integer.parseInt(request.params(":team_id")));
+      model.put("team", team);
+      Member member = Member.find(Integer.parseInt(request.params(":member_id")));
       model.put("member", member);
       model.put("template", "templates/member.vtl");
       return new ModelAndView(model, layout);
